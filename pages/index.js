@@ -6,7 +6,6 @@ import MediumCard from '../components/MediumCard';
 import SmallCard from '../components/SmallCard';
 
 export default function Home({exportedData, cardData}) {
-    console.log(cardData);
     return (
         <div>
             <Head>
@@ -34,9 +33,11 @@ export default function Home({exportedData, cardData}) {
                 {/* live anywhere */}
                 <section>
                     <h2 className='font-semibold text-4xl py-8'>Live Anywhere</h2>
+                   <div className='flex space-x-3 overflow-scroll scrollbar-hide p-3 -ml-3'>
                    {cardData?.map(({img, title}, index )=> (
-                        <MediumCard key={index} img={img} tittle={title}/>
+                        <MediumCard key={index} img={img} title={title}/>
                     ))}
+                   </div>
                 </section>
             </main>
         </div>
