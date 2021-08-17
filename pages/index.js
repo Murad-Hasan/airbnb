@@ -1,9 +1,12 @@
+
 import Head from 'next/head'
 import Banner from '../components/Banner';
 import Header from "../components/Header";
+import MediumCard from '../components/MediumCard';
 import SmallCard from '../components/SmallCard';
 
-export default function Home({exportedData}) {
+export default function Home({exportedData, cardData}) {
+    console.log(cardData);
     return (
         <div>
             <Head>
@@ -18,7 +21,7 @@ export default function Home({exportedData}) {
                     <h2 className='text-4xl font-semibold pb-5'>Explore Nearby</h2>
                     {/* Fetch Some Data from API */}
                    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4'>
-                    {exportedData.map (({img, location, distance})=> (
+                    {exportedData?.map (({img, location, distance})=> (
                             <SmallCard 
                             key={img} 
                             img={img} 
@@ -28,6 +31,13 @@ export default function Home({exportedData}) {
                         ))}
                    </div>
                 </section>
+                {/* live anywhere */}
+                <section>
+                    <h2 className='font-semibold text-4xl py-8'>Live Anywhere</h2>
+                   {cardData?.map(({img, title}, index )=> (
+                        <MediumCard key={index} img={img} tittle={title}/>
+                    ))}
+                </section>
             </main>
         </div>
     )
@@ -36,9 +46,14 @@ export default function Home({exportedData}) {
 export async function getStaticProps() {
     const exportedData = await fetch('https://jsonkeeper.com/b/SXCL?fbclid=IwAR28JMT0vNnP9UKfZVs0J1PLctgbQRsc-batLm24_apv0R_IqZkCd7osHjk')
     .then(res => res.json())
+
+    const cardData = await fetch('https://jsonkeeper.com/b/2Z2G?fbclid=IwAR0B9_n86cOiFgLJFC0qN7x4ApaYEg08IgUbT9ZmIVBZI5Law_0lB7Zka3Y')
+    .then(res => res.json())
+
     return {
         props: {
-            exportedData
+            exportedData,
+            cardData
         },
     };
 }
