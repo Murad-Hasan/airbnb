@@ -2,6 +2,7 @@
 import Head from 'next/head'
 import Banner from '../components/Banner';
 import Header from "../components/Header";
+import LargeCard from '../components/LargeCard';
 import MediumCard from '../components/MediumCard';
 import SmallCard from '../components/SmallCard';
 
@@ -38,6 +39,19 @@ export default function Home({exportedData, cardData}) {
                         <MediumCard key={index} img={img} title={title}/>
                     ))}
                    </div>
+                </section>
+                {/* Large Card  */}
+                <section>
+                    <LargeCard
+                    img='https://i.ibb.co/BcswnDv/image.jpg'
+                    title='The Greatest Outdoors'
+                    description='Wishlists curated by Airbnb.'
+                    ButtonText='Get Inspired'
+                    />
+                </section>
+                {/* Footer */}
+                <section>
+                    
                 </section>
             </main>
         </div>
